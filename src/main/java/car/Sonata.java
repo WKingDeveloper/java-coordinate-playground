@@ -2,22 +2,8 @@ package car;
 
 public class Sonata extends Car {
 
-    private double distancePerLiter = 10;
-    private double distance;
-
-    Sonata(double distance) {
-        this.distance = distance;
+    Sonata(double distancePerLiter) {
+        super(distancePerLiter);
     }
-
-    @Override
-    double getDistancePerLiter() {
-        return this.distancePerLiter;
-    }
-
-    @Override
-    double getTripDistance() {
-        return this.distance;
-    }
-
 
 }

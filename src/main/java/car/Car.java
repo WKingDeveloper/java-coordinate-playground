@@ -2,18 +2,13 @@ package car;
 
 public abstract class Car {
 
-    /**
-     * 리터당 이동 거리. 즉, 연비
-     */
-    abstract double getDistancePerLiter();
+    private double distancePerLiter;
 
-    /**
-     * 여행하려는 거리
-     */
-    abstract double getTripDistance();
+    public Car(double distancePerLiter) {
+        this.distancePerLiter = distancePerLiter;
+    }
 
-
-    double fuelCalculateByDistance(){
-        return getTripDistance()/getDistancePerLiter();
+    double fuelCalculateByDistance(double distance){
+        return distance/this.distancePerLiter;
     }
 }
