@@ -1,8 +1,21 @@
 package car;
 
 public class K5 extends Car {
-    K5(double distancePerLiter) {
-        super(distancePerLiter);
+    private double distancePerLiter = 13;
+    private String name = "K5";
+
+    K5(double distance) {
+        super(distance);
+    }
+
+    @Override
+    public double getDistancePerLiter() {
+        return this.distancePerLiter;
+    }
+
+    @Override
+    String getName() {
+        return this.name;
     }
 
 }

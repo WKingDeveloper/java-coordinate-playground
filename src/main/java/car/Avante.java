@@ -2,8 +2,21 @@ package car;
 
 public class Avante extends Car {
 
-    Avante(double distancePerLiter) {
-        super(distancePerLiter);
+    private double distancePerLiter = 15;
+    private String name = "Avante";
+
+    Avante(double distance) {
+        super(distance);
+    }
+
+    @Override
+    public double getDistancePerLiter() {
+        return this.distancePerLiter;
+    }
+
+    @Override
+    String getName() {
+        return this.name;
     }
 
 }
