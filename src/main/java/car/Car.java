@@ -1,24 +1,32 @@
 package car;
 
-public abstract class Car{
+public class Car implements CarImpl{
 
-    private double distance = 0;
+    private double distance;
 
 
     public Car(double distance) {
         this.distance = distance;
     }
 
+
+    @Override
     public double fuelCalculateByDistance() {
         return getDistance()/getDistancePerLiter();
     }
 
+    @Override
     public double getDistance() {
         return this.distance;
     }
 
-    abstract double getDistancePerLiter();
+    @Override
+    public double getDistancePerLiter() {
+        return 0;
+    }
 
-    abstract String getName();
-
+    @Override
+    public String getName() {
+        return "car";
+    }
 }
