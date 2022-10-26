@@ -1,9 +1,9 @@
 package coordinate;
 
+import coordinate.model.Calculator;
 import coordinate.model.Coordinate;
 import coordinate.model.Coordinates;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -48,8 +48,8 @@ public class CoordinateTest {
 
         Coordinate coordinate1 = new Coordinate(x1, y1);
         Coordinate coordinate2 = new Coordinate(x2, y2);
-
-        assertThat(coordinate1.calculateLineLength(coordinate1, coordinate2))
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculateLineLength(coordinate1, coordinate2))
                 .isEqualTo(length, offset(0.000099));
     }
 
