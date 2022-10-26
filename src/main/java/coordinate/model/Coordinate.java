@@ -30,5 +30,12 @@ public class Coordinate {
         this.positionX = new Position(positionX);
         this.positionY = new Position(positionY);
     }
+
+    public double calculateLineLength(Coordinate c1, Coordinate c2) {
+        int x = c1.positionX.getPosition() - c2.positionX.getPosition();
+        int y = c1.positionY.getPosition() - c2.positionY.getPosition();
+        return Math.sqrt(x * x + y * y);
+
+    }
 }
 

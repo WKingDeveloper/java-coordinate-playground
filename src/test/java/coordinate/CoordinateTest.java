@@ -3,13 +3,14 @@ package coordinate;
 import coordinate.model.Coordinate;
 import coordinate.model.Coordinates;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class CoordinateTest {
@@ -38,6 +39,18 @@ public class CoordinateTest {
             coordinate.setPositions(x1,y1);
         });
         assertThat(thrown).isInstanceOf(RuntimeException.class);
+    }
+
+    @CsvSource(value = {"10/ 10/ 14/ 15/ 6.403124"}, delimiterString = "/")
+    @ParameterizedTest
+    @DisplayName("직선 길이 구하기 테스트")
+    void calculateLineLengthTest(int x1, int y1, int x2, int y2, double length) {
+
+        Coordinate coordinate1 = new Coordinate(x1, y1);
+        Coordinate coordinate2 = new Coordinate(x2, y2);
+
+        assertThat(coordinate1.calculateLineLength(coordinate1, coordinate2))
+                .isEqualTo(length, offset(0.000099));
     }
 
 
