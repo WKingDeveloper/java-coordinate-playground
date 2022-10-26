@@ -25,4 +25,10 @@ public class Coordinate {
 
         return this;
     }
+
+    public void setPositions(int positionX, int positionY) {
+        this.positionX = new Position(positionX);
+        this.positionY = new Position(positionY);
+    }
 }
+
