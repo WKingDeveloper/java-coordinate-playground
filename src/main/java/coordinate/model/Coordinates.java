@@ -1,6 +1,7 @@
 package coordinate.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class Coordinates {
@@ -18,6 +19,7 @@ public class Coordinates {
             this.coordinateList.add(coordinate);
         }
         setFigure();
+        validRectangle();
         return this.coordinateList;
     }
 
@@ -33,6 +35,20 @@ public class Coordinates {
         this.figure = Figure.LINE;
         if (this.coordinateList.size() == 4) {
             this.figure = Figure.SQUARE;
+        }
+    }
+
+    private void validRectangle() {
+        if (this.figure == Figure.SQUARE) {
+            HashSet<Integer> list = new HashSet<>();
+            this.coordinateList.stream().forEach(coordinate ->{
+                    list.add(coordinate.getPositionX());
+                    list.add(coordinate.getPositionY());
+
+            });
+            if (list.size() != 3) {
+                throw new RuntimeException("직사각형이 아닙니다.");
+            }
         }
     }
 }
