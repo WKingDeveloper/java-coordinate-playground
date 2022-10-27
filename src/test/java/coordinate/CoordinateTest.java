@@ -62,10 +62,10 @@ public class CoordinateTest {
         assertThat(coordinates.getFigure()).isEqualTo(Figure.valueOf(figure));
     }
 
-    @CsvSource(value = {"(10,10)-(22,10)-(22,18)-(10,16)/ false", "(8,10)-(22,10)-(20,18)-(10,18)/ false"}, delimiterString = "/")
+    @CsvSource(value = {"(10,10)-(22,10)-(22,18)-(10,16)", "(8,10)-(22,10)-(20,18)-(10,18)"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("사각형의 모양이 직사각형인지 확인")
-    void validRectangle(String input, String figure) {
+    void validRectangle(String input) {
         Coordinates coordinates = new Coordinates();
         Throwable throwable = catchThrowable(()->{
             coordinates.setCoordinates(input);
@@ -82,5 +82,15 @@ public class CoordinateTest {
         Calculator calculator = new Calculator();
         assertThat(calculator.calculate(coordinates))
                 .isEqualTo(area);
+    }
+
+    @CsvSource(value = {"((10,10)-(14,15)-(20,8)/ TRIANGLE"}, delimiterString = "/")
+    @ParameterizedTest
+    @DisplayName("좌표가 3개 입력되었을 때 모양이 삼각형인지 테스트")
+    void validTriangle(String input, String figure) {
+        Coordinates coordinates = new Coordinates();
+        coordinates.setCoordinates(input);
+
+        assertThat(coordinates.getFigure()).isEqualTo(Figure.valueOf(figure));
     }
 }

@@ -32,10 +32,17 @@ public class Coordinates {
     }
 
     private void setFigure() {
-        this.figure = Figure.LINE;
         if (this.coordinateList.size() == 4) {
             this.figure = Figure.SQUARE;
+            return;
         }
+
+        if (this.coordinateList.size() == 3) {
+            this.figure = Figure.TRIANGLE;
+            return;
+        }
+
+        this.figure = Figure.LINE;
     }
 
     private void validRectangle() {
