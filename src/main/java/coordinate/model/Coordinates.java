@@ -61,4 +61,8 @@ public class Coordinates {
     public boolean isSquare() {
         return this.figure == Figure.SQUARE;
     }
+
+    public boolean isTriAngle() {
+        return this.figure == Figure.TRIANGLE;
+    }
 }

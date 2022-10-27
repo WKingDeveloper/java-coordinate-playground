@@ -84,7 +84,7 @@ public class CoordinateTest {
                 .isEqualTo(area);
     }
 
-    @CsvSource(value = {"((10,10)-(14,15)-(20,8)/ TRIANGLE"}, delimiterString = "/")
+    @CsvSource(value = {"(10,10)-(14,15)-(20,8)/ TRIANGLE"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("좌표가 3개 입력되었을 때 모양이 삼각형인지 테스트")
     void validTriangle(String input, String figure) {
@@ -92,5 +92,16 @@ public class CoordinateTest {
         coordinates.setCoordinates(input);
 
         assertThat(coordinates.getFigure()).isEqualTo(Figure.valueOf(figure));
+    }
+
+    @CsvSource(value = {"(10,10)-(14,15)-(20,8)/ 29.0"}, delimiterString = "/")
+    @ParameterizedTest
+    @DisplayName("삼각형 넓이 구하기 테스트")
+    void calculateTriangleArea(String input, double area) {
+        Coordinates coordinates = new Coordinates();
+        coordinates.setCoordinates(input);
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculate(coordinates))
+                .isEqualTo(area,offset(0.99));
     }
 }
