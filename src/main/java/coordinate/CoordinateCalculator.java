@@ -21,8 +21,8 @@ public class CoordinateCalculator {
             isValidCoordinate = coordinateCalculator.runGame(coordinates, coordinatesToString);
         }
 
-        double length = calculator.calculate(coordinates);
-        resultView.Result(length);
+        double result = calculator.calculate(coordinates);
+        resultView.Result(result,coordinates.getFigure());
     }
 
     private boolean runGame(Coordinates coordinates, String input) {
