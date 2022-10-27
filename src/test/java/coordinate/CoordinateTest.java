@@ -3,6 +3,7 @@ package coordinate;
 import coordinate.model.Calculator;
 import coordinate.model.Coordinate;
 import coordinate.model.Coordinates;
+import coordinate.model.Figure;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -53,5 +54,13 @@ public class CoordinateTest {
                 .isEqualTo(length, offset(0.000099));
     }
 
+    @CsvSource(value = {"(10,10)-(14,15)/ LINE","(10,10)-(22,10)-(22,18)-(10,18)/ SQUARE"}, delimiterString = "/")
+    @ParameterizedTest
+    @DisplayName("입력받은 문자열이 어떤 도형인지 판별")
+    void distinguishFigure(String input, String figure) {
+        Coordinates coordinates = new Coordinates();
+        coordinates.setCoordinates(input);
+        assertThat(coordinates.getFigure()).isEqualTo(Figure.valueOf(figure));
+    }
 
 }

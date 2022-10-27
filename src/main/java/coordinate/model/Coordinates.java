@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Coordinates {
 
+    Figure figure;
     List<Coordinate> coordinateList = new ArrayList<>();
 
 
@@ -16,6 +17,7 @@ public class Coordinates {
             coordinate = coordinate.setCoordinate(splitInputs[i]);
             this.coordinateList.add(coordinate);
         }
+        setFigure();
         return this.coordinateList;
     }
 
@@ -23,5 +25,14 @@ public class Coordinates {
         return coordinateList;
     }
 
+    public Figure getFigure() {
+        return figure;
+    }
 
+    private void setFigure() {
+        this.figure = Figure.LINE;
+        if (this.coordinateList.size() == 4) {
+            this.figure = Figure.SQUARE;
+        }
+    }
 }
