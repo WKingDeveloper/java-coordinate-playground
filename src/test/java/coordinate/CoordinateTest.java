@@ -42,15 +42,14 @@ public class CoordinateTest {
         assertThat(thrown).isInstanceOf(RuntimeException.class);
     }
 
-    @CsvSource(value = {"10/ 10/ 14/ 15/ 6.403124"}, delimiterString = "/")
+    @CsvSource(value = {"(10,10)-(14,15)/ 6.403124"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("직선 길이 구하기 테스트")
-    void calculateLineLengthTest(int x1, int y1, int x2, int y2, double length) {
-
-        Coordinate coordinate1 = new Coordinate(x1, y1);
-        Coordinate coordinate2 = new Coordinate(x2, y2);
+    void calculateLineLengthTest(String input, double length) {
+        Coordinates coordinates = new Coordinates();
+        coordinates.setCoordinates(input);
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculateLineLength(coordinate1, coordinate2))
+        assertThat(calculator.calculate(coordinates))
                 .isEqualTo(length, offset(0.000099));
     }
 
@@ -74,4 +73,14 @@ public class CoordinateTest {
         assertThat(throwable).isInstanceOf(RuntimeException.class);
     }
 
+    @CsvSource(value = {"(10,10)-(22,10)-(22,18)-(10,18)/ 96"}, delimiterString = "/")
+    @ParameterizedTest
+    @DisplayName("직사각형 넓이 구하기 테스트")
+    void calculateSquareArea(String input, double area) {
+        Coordinates coordinates = new Coordinates();
+        coordinates.setCoordinates(input);
+        Calculator calculator = new Calculator();
+        assertThat(calculator.calculate(coordinates))
+                .isEqualTo(area);
+    }
 }

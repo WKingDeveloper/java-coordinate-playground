@@ -39,16 +39,19 @@ public class Coordinates {
     }
 
     private void validRectangle() {
-        if (this.figure == Figure.SQUARE) {
+        if (isSquare()) {
             HashSet<Integer> list = new HashSet<>();
             this.coordinateList.stream().forEach(coordinate ->{
                     list.add(coordinate.getPositionX());
                     list.add(coordinate.getPositionY());
-
             });
             if (list.size() != 3) {
                 throw new RuntimeException("직사각형이 아닙니다.");
             }
         }
+    }
+
+    public boolean isSquare() {
+        return this.figure == Figure.SQUARE;
     }
 }
