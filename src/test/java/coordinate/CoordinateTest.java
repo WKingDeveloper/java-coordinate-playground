@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
@@ -70,16 +68,22 @@ public class CoordinateTest {
         assertThat(throwable).isInstanceOf(RuntimeException.class);
     }
 
-    /*@CsvSource(value = {"(10,10)-(22,10)-(22,18)-(10,18)/ 96"}, delimiterString = "/")
+    @CsvSource(value = {"10/ 10/ 22/ 10/ 22/ 18/ 10/ 18/ 96"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("직사각형 넓이 구하기 테스트")
-    void calculateSquareArea(String input, double area) {
+    void calculateSquareArea(int x1, int y1, int x2, int y2,int x3, int y3, int x4, int y4, double area) {
         Points points = new Points();
-        points.setPoints(input);
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculate(points))
+        points.add(new Point(x1,y1));
+        points.add(new Point(x2,y2));
+        points.add(new Point(x3,y3));
+        points.add(new Point(x4,y4));
+
+        Square square = new Square(points);
+        assertThat(square.calculate())
                 .isEqualTo(area);
     }
+
+    /*
 
     @CsvSource(value = {"(10,10)-(14,15)-(20,8)/ TRIANGLE"}, delimiterString = "/")
     @ParameterizedTest

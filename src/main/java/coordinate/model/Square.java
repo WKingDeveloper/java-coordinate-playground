@@ -1,17 +1,22 @@
 package coordinate.model;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 
 public class Square extends Figure {
 
     public Square(Points points) {
         super(points);
+        validRectangle();
     }
 
     @Override
     public double calculate() {
-        return 0;
+        return Calculator.calculateSquareArea(super.getPoints());
     }
+
 
     private void validRectangle() {
 
