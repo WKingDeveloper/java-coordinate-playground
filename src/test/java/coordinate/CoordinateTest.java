@@ -3,7 +3,6 @@ package coordinate;
 import coordinate.model.*;
 import coordinate.utils.StringConverter;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -16,42 +15,28 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 public class CoordinateTest {
 
 
-    @Test
+    @CsvSource(value = {"(10,10)-(14,15)/ 10/ 10/ 14/ 15",
+            "(11,13)-(8,6)/ 11/ 13/ 8/ 6"},
+            delimiterString = "/")
+    @ParameterizedTest
     @DisplayName("입력받은 문자열 Point List로 파싱")
-    void inputParsing() {
-        String input = "(10,10)-(14,15)";
+    void inputParsing(String input, int x1, int y1, int x2, int y2) {
         Points points = StringConverter.stringToPoints(input);
         Points validPoints = new Points();
-        validPoints.add(new Point(10, 10));
-        validPoints.add(new Point(14, 15));
+        validPoints.add(new Point(x1, y1));
+        validPoints.add(new Point(x2, y2));
         assertThat(points)
                 .usingRecursiveComparison()
                 .isEqualTo(validPoints);
     }
 
 
-    @CsvSource(value = {"(10,10)-(14,15)/ 10/ 10/ 14/ 15",
-            "(11,13)-(8,6)/ 11/ 13/ 8/ 6"},
-            delimiterString = "/")
-    @ParameterizedTest
-    @DisplayName("입력받은 문자열을 통해 좌표 리스트 만들기")
-    void splitCoordinates(String input, int x1, int y1, int x2, int y2) {
-        Coordinate coordinate1 = new Coordinate(x1, y1);
-        Coordinate coordinate2 = new Coordinate(x2, y2);
-        Coordinates coordinates = new Coordinates();
-        coordinates.setCoordinates(input);
-        assertThat(coordinates.getCoordinateList())
-                .usingRecursiveComparison()
-                .isEqualTo(Arrays.asList(coordinate1, coordinate2));
-    }
-
-    @CsvSource(value = {"10/ -1","11/ 26"}, delimiterString = "/")
+    @CsvSource(value = {"-1","25"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("좌표 범위 에러 테스트")
-    void validCoordinates(int x1, int y1) {
-        Coordinate coordinate = new Coordinate();
+    void validCoordinates(int x) {
         Throwable thrown = catchThrowable(() -> {
-            coordinate.setPositions(x1,y1);
+            Position position = new Position(x);
         });
         assertThat(thrown).isInstanceOf(RuntimeException.class);
     }
@@ -118,4 +103,24 @@ public class CoordinateTest {
         assertThat(calculator.calculate(coordinates))
                 .isEqualTo(area,offset(0.99));
     }
+
+
+
+    @CsvSource(value = {"(10,10)-(14,15)/ 10/ 10/ 14/ 15",
+            "(11,13)-(8,6)/ 11/ 13/ 8/ 6"},
+            delimiterString = "/")
+    @ParameterizedTest
+    @DisplayName("입력받은 문자열을 통해 좌표 리스트 만들기")
+    void splitCoordinates(String input, int x1, int y1, int x2, int y2) {
+        Points points = StringConverter.stringToPoints(input);
+
+        Coordinate coordinate1 = new Coordinate(x1, y1);
+        Coordinate coordinate2 = new Coordinate(x2, y2);
+        Coordinates coordinates = new Coordinates();
+        coordinates.setCoordinates(input);
+        assertThat(coordinates.getCoordinateList())
+                .usingRecursiveComparison()
+                .isEqualTo(Arrays.asList(coordinate1, coordinate2));
+    }
+
 }
