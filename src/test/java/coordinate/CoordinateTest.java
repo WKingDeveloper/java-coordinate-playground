@@ -1,10 +1,9 @@
 package coordinate;
 
-import coordinate.model.Calculator;
-import coordinate.model.Coordinate;
-import coordinate.model.Coordinates;
-import coordinate.model.Figure;
+import coordinate.model.*;
+import coordinate.utils.StringConverter;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -15,6 +14,21 @@ import static org.assertj.core.api.Assertions.offset;
 import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 public class CoordinateTest {
+
+
+    @Test
+    @DisplayName("입력받은 문자열 Point List로 파싱")
+    void inputParsing() {
+        String input = "(10,10)-(14,15)";
+        Points points = StringConverter.stringToPoints(input);
+        Points validPoints = new Points();
+        validPoints.add(new Point(10, 10));
+        validPoints.add(new Point(14, 15));
+        assertThat(points)
+                .usingRecursiveComparison()
+                .isEqualTo(validPoints);
+    }
+
 
     @CsvSource(value = {"(10,10)-(14,15)/ 10/ 10/ 14/ 15",
             "(11,13)-(8,6)/ 11/ 13/ 8/ 6"},
