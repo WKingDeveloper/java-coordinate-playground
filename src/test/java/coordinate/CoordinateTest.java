@@ -62,13 +62,18 @@ public class CoordinateTest {
         assertThat(coordinates.getFigure()).isEqualTo(Figure.valueOf(figure));
     }
 
-    @CsvSource(value = {"(10,10)-(22,10)-(22,18)-(10,16)", "(8,10)-(22,10)-(20,18)-(10,18)"}, delimiterString = "/")
+    @CsvSource(value = {"10/ 10/ 22/ 10/ 22/ 18/ 10/ 16","8/ 10/ 22/ 10/ 20/ 18/ 10/ 18"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("사각형의 모양이 직사각형인지 확인")
-    void validRectangle(String input) {
-        Coordinates coordinates = new Coordinates();
+    void validRectangle(int x1, int y1, int x2, int y2,int x3, int y3, int x4, int y4) {
+        Points points = new Points();
+        points.add(new Point(x1,y1));
+        points.add(new Point(x2,y2));
+        points.add(new Point(x3,y3));
+        points.add(new Point(x4,y4));
+
         Throwable throwable = catchThrowable(()->{
-            coordinates.setCoordinates(input);
+            Square square = new Square(points);
         });
         assertThat(throwable).isInstanceOf(RuntimeException.class);
     }
