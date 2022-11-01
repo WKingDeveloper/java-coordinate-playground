@@ -83,46 +83,19 @@ public class CoordinateTest {
                 .isEqualTo(area);
     }
 
-    /*
 
-    @CsvSource(value = {"(10,10)-(14,15)-(20,8)/ TRIANGLE"}, delimiterString = "/")
-    @ParameterizedTest
-    @DisplayName("좌표가 3개 입력되었을 때 모양이 삼각형인지 테스트")
-    void validTriangle(String input, String figure) {
-        Points points = new Points();
-        points.setPoints(input);
-
-        assertThat(points.getFigure()).isEqualTo(Figure.valueOf(figure));
-    }
-
-    @CsvSource(value = {"(10,10)-(14,15)-(20,8)/ 29.0"}, delimiterString = "/")
+    @CsvSource(value = {"10/ 10/ 14/ 15/ 20/ 8/ 29.0"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("삼각형 넓이 구하기 테스트")
-    void calculateTriangleArea(String input, double area) {
+    void calculateTriangleArea(int x1, int y1, int x2, int y2,int x3, int y3, double area) {
         Points points = new Points();
-        points.setPoints(input);
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculate(points))
+        points.add(new Point(x1,y1));
+        points.add(new Point(x2,y2));
+        points.add(new Point(x3,y3));
+        Triangle triangle = new Triangle(points);
+        assertThat(triangle.calculate())
                 .isEqualTo(area,offset(0.99));
     }
 
 
-
-    @CsvSource(value = {"(10,10)-(14,15)/ 10/ 10/ 14/ 15",
-            "(11,13)-(8,6)/ 11/ 13/ 8/ 6"},
-            delimiterString = "/")
-    @ParameterizedTest
-    @DisplayName("입력받은 문자열을 통해 좌표 리스트 만들기")
-    void splitPoints(String input, int x1, int y1, int x2, int y2) {
-        Points points = StringConverter.stringToPoints(input);
-
-        Coordinate coordinate1 = new Coordinate(x1, y1);
-        Coordinate coordinate2 = new Coordinate(x2, y2);
-        Points points = new Points();
-        points.setPoints(input);
-        assertThat(points.getCoordinateList())
-                .usingRecursiveComparison()
-                .isEqualTo(Arrays.asList(coordinate1, coordinate2));
-    }
-*/
 }

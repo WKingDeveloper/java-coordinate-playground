@@ -1,9 +1,6 @@
 package coordinate.model;
 
-import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashSet;
-import java.util.List;
 
 public class Square extends Figure {
 
