@@ -1,14 +1,13 @@
 package coordinate.view;
 
-import coordinate.model.Figure;
-
 public class ResultView {
 
-    public void Result(double result, Figure figure) {
-        System.out.println("사각형의 넓이 : " + (int) result);
-
-        System.out.printf("삼각형 넓이 : %.1f" , result);
-
-        System.out.println("두 점 사이의 거리 : " + result);
+    public void Result(double result, String className) {
+        System.out.println(className + " : " + result);
     }
+
+    public void validFailInputCoordinate() {
+        System.out.println("올바르지 않은 좌표를 입력하였습니다.");
+    }
+
 }
