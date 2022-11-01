@@ -1,6 +1,5 @@
 package coordinate;
 
-import coordinate.model.Calculator;
 import coordinate.model.Figure;
 import coordinate.model.FigureFactory;
 import coordinate.model.Points;
