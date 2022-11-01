@@ -34,9 +34,9 @@ public class CoordinateTest {
     @CsvSource(value = {"-1","25"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("좌표 범위 에러 테스트")
-    void validCoordinates(int x) {
+    void validPoints(int x) {
         Throwable thrown = catchThrowable(() -> {
-            Position position = new Position(x);
+            Coordinate coordinate = new Coordinate(x);
         });
         assertThat(thrown).isInstanceOf(RuntimeException.class);
     }
@@ -49,18 +49,10 @@ public class CoordinateTest {
         points.add(new Point(x1,y1));
         points.add(new Point(x2,y2));
         Line line = new Line(points);
-        assertThat(line.calculateLineLength())
+        assertThat(line.calculate())
                 .isEqualTo(length, offset(0.000099));
     }
 
-    @CsvSource(value = {"(10,10)-(14,15)/ LINE","(10,10)-(22,10)-(22,18)-(10,18)/ SQUARE"}, delimiterString = "/")
-    @ParameterizedTest
-    @DisplayName("입력받은 문자열이 어떤 도형인지 판별")
-    void distinguishFigure(String input, String figure) {
-        Coordinates coordinates = new Coordinates();
-        coordinates.setCoordinates(input);
-        assertThat(coordinates.getFigure()).isEqualTo(Figure.valueOf(figure));
-    }
 
     @CsvSource(value = {"10/ 10/ 22/ 10/ 22/ 18/ 10/ 16","8/ 10/ 22/ 10/ 20/ 18/ 10/ 18"}, delimiterString = "/")
     @ParameterizedTest
@@ -78,14 +70,14 @@ public class CoordinateTest {
         assertThat(throwable).isInstanceOf(RuntimeException.class);
     }
 
-    @CsvSource(value = {"(10,10)-(22,10)-(22,18)-(10,18)/ 96"}, delimiterString = "/")
+    /*@CsvSource(value = {"(10,10)-(22,10)-(22,18)-(10,18)/ 96"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("직사각형 넓이 구하기 테스트")
     void calculateSquareArea(String input, double area) {
-        Coordinates coordinates = new Coordinates();
-        coordinates.setCoordinates(input);
+        Points points = new Points();
+        points.setPoints(input);
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculate(coordinates))
+        assertThat(calculator.calculate(points))
                 .isEqualTo(area);
     }
 
@@ -93,20 +85,20 @@ public class CoordinateTest {
     @ParameterizedTest
     @DisplayName("좌표가 3개 입력되었을 때 모양이 삼각형인지 테스트")
     void validTriangle(String input, String figure) {
-        Coordinates coordinates = new Coordinates();
-        coordinates.setCoordinates(input);
+        Points points = new Points();
+        points.setPoints(input);
 
-        assertThat(coordinates.getFigure()).isEqualTo(Figure.valueOf(figure));
+        assertThat(points.getFigure()).isEqualTo(Figure.valueOf(figure));
     }
 
     @CsvSource(value = {"(10,10)-(14,15)-(20,8)/ 29.0"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("삼각형 넓이 구하기 테스트")
     void calculateTriangleArea(String input, double area) {
-        Coordinates coordinates = new Coordinates();
-        coordinates.setCoordinates(input);
+        Points points = new Points();
+        points.setPoints(input);
         Calculator calculator = new Calculator();
-        assertThat(calculator.calculate(coordinates))
+        assertThat(calculator.calculate(points))
                 .isEqualTo(area,offset(0.99));
     }
 
@@ -117,16 +109,16 @@ public class CoordinateTest {
             delimiterString = "/")
     @ParameterizedTest
     @DisplayName("입력받은 문자열을 통해 좌표 리스트 만들기")
-    void splitCoordinates(String input, int x1, int y1, int x2, int y2) {
+    void splitPoints(String input, int x1, int y1, int x2, int y2) {
         Points points = StringConverter.stringToPoints(input);
 
         Coordinate coordinate1 = new Coordinate(x1, y1);
         Coordinate coordinate2 = new Coordinate(x2, y2);
-        Coordinates coordinates = new Coordinates();
-        coordinates.setCoordinates(input);
-        assertThat(coordinates.getCoordinateList())
+        Points points = new Points();
+        points.setPoints(input);
+        assertThat(points.getCoordinateList())
                 .usingRecursiveComparison()
                 .isEqualTo(Arrays.asList(coordinate1, coordinate2));
     }
-
+*/
 }

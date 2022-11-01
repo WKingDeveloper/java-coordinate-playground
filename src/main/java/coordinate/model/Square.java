@@ -2,22 +2,21 @@ package coordinate.model;
 
 import java.util.HashSet;
 
-public class Square {
+public class Square extends Figure {
 
-    private Points points;
     public Square(Points points) {
-        validRectangle();
-        this.points = points;
+        super(points);
     }
 
-    public double calculateLineLength() {
-        return 2;
+    @Override
+    public double calculate() {
+        return 0;
     }
 
     private void validRectangle() {
 
         HashSet<Integer> list = new HashSet<>();
-        this.points.getPoints().stream().forEach(coordinate ->{
+        super.getPoints().points.stream().forEach(coordinate ->{
             list.add(coordinate.getPositionX());
             list.add(coordinate.getPositionY());
         });

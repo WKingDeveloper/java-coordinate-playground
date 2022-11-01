@@ -1,7 +1,7 @@
 package coordinate;
 
 import coordinate.model.Calculator;
-import coordinate.model.Coordinates;
+import coordinate.model.Points;
 import coordinate.view.InputView;
 import coordinate.view.ResultView;
 
@@ -11,23 +11,23 @@ public class CoordinateCalculator {
 
         InputView inputView = new InputView();
         ResultView resultView = new ResultView();
-        Coordinates coordinates = new Coordinates();
+        Points points = new Points();
         CoordinateCalculator coordinateCalculator = new CoordinateCalculator();
         Calculator calculator = new Calculator();
 
         boolean isValidCoordinate = true;
         while (isValidCoordinate){
-            String coordinatesToString = inputView.init();
-            isValidCoordinate = coordinateCalculator.runGame(coordinates, coordinatesToString);
+            String pointsToString = inputView.init();
+            isValidCoordinate = coordinateCalculator.runGame(points, pointsToString);
         }
 
-        double result = calculator.calculate(coordinates);
-        resultView.Result(result,coordinates.getFigure());
+//        double result = calculator.calculate(points);
+//        resultView.Result(result,points.getFigure());
     }
 
-    private boolean runGame(Coordinates coordinates, String input) {
+    private boolean runGame(Points points, String input) {
         try {
-            coordinates.setCoordinates(input);
+//            points.setPoints(input);
             return false;
         } catch (RuntimeException e) {
             return true;

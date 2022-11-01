@@ -1,16 +1,14 @@
 package coordinate.model;
 
-public class Line {
-    private Points points;
+public class Line extends Figure {
+
     public Line(Points points) {
-        this.points = points;
+        super(points);
     }
 
-    public double calculateLineLength() {
-        Point point1 = this.points.getPoints().get(0);
-        Point point2 = this.points.getPoints().get(1);
-        int x = point1.getPositionX() - point2.getPositionX();
-        int y = point1.getPositionY() - point2.getPositionY();
-        return Math.sqrt(x * x + y * y);
+    @Override
+    public double calculate() {
+        return Calculator.calculateLineLength(this.getPoints().points.get(0), this.getPoints().points.get(1));
     }
+
 }

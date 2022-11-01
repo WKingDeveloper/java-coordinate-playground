@@ -2,19 +2,19 @@ package coordinate.model;
 
 public class Point {
 
-    private Position positionX;
-    private Position positionY;
+    private Coordinate coordinateX;
+    private Coordinate coordinateY;
 
     public Point(int x, int y) {
-        this.positionX = new Position(x);
-        this.positionY = new Position(y);
+        this.coordinateX = new Coordinate(x);
+        this.coordinateY = new Coordinate(y);
     }
 
     public int getPositionX() {
-        return positionX.getPosition();
+        return coordinateX.getPosition();
     }
 
     public int getPositionY() {
-        return positionY.getPosition();
+        return coordinateY.getPosition();
     }
 }

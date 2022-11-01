@@ -1,7 +1,15 @@
 package coordinate.model;
 
-public enum Figure {
-    LINE,
-    SQUARE,
-    TRIANGLE
+public abstract class Figure {
+    private Points points;
+
+    public Figure(Points points) {
+        this.points = points;
+    }
+
+    public abstract double calculate();
+
+    public Points getPoints() {
+        return points;
+    }
 }

@@ -1,31 +1,22 @@
 package coordinate.model;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class Calculator {
-    public double calculate(Coordinates coordinates) {
-        if (coordinates.isSquare()) {
-            return calculateSquareArea(coordinates);
-        }
 
-        if (coordinates.isTriAngle()) {
-            return calculateTriangleArea(coordinates);
-        }
 
-        return calculateLineLength(coordinates.getCoordinateList().get(0),coordinates.getCoordinateList().get(1));
-    }
-
-    private double calculateLineLength(Coordinate c1, Coordinate c2) {
+    public static double calculateLineLength(Point c1, Point c2) {
         int x = c1.getPositionX() - c2.getPositionX();
         int y = c1.getPositionY() - c2.getPositionY();
         return Math.sqrt(x * x + y * y);
     }
 
-    private double calculateSquareArea(Coordinates coordinates) {
+    public static double calculateSquareArea(Points points) {
         List<Integer> xPositionList = new ArrayList<>();
         List<Integer> yPositionList = new ArrayList<>();
-        coordinates.getCoordinateList().stream().forEach(coordinate ->{
+        points.getPoints().stream().forEach(coordinate ->{
             xPositionList.add(coordinate.getPositionX());
             yPositionList.add(coordinate.getPositionY());
         });
@@ -34,10 +25,10 @@ public class Calculator {
         return (xPositionList.get(0)-xPositionList.get(3)) * (yPositionList.get(0)-yPositionList.get(3));
     }
 
-    private double calculateTriangleArea(Coordinates coordinates) {
-        double length1 = calculateLineLength(coordinates.getCoordinateList().get(0), coordinates.getCoordinateList().get(1));
-        double length2 = calculateLineLength(coordinates.getCoordinateList().get(0), coordinates.getCoordinateList().get(2));
-        double length3 = calculateLineLength(coordinates.getCoordinateList().get(1), coordinates.getCoordinateList().get(2));
+    public static double calculateTriangleArea(Points points) {
+        double length1 = calculateLineLength(points.getPoints().get(0), points.getPoints().get(1));
+        double length2 = calculateLineLength(points.getPoints().get(0), points.getPoints().get(2));
+        double length3 = calculateLineLength(points.getPoints().get(1), points.getPoints().get(2));
 
         double s = (length1+length2+length3)/2;
 
