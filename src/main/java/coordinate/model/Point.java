@@ -9,4 +9,12 @@ public class Point {
         this.positionX = new Position(x);
         this.positionY = new Position(y);
     }
+
+    public int getPositionX() {
+        return positionX.getPosition();
+    }
+
+    public int getPositionY() {
+        return positionY.getPosition();
+    }
 }

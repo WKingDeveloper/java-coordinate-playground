@@ -10,4 +10,8 @@ public class Points {
     public void add(Point point) {
         this.points.add(point);
     }
+
+    public List<Point> getPoints() {
+        return points;
+    }
 }

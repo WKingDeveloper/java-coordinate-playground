@@ -41,14 +41,15 @@ public class CoordinateTest {
         assertThat(thrown).isInstanceOf(RuntimeException.class);
     }
 
-    @CsvSource(value = {"(10,10)-(14,15)/ 6.403124"}, delimiterString = "/")
+    @CsvSource(value = {"10/ 10/ 14/ 15/ 6.403124"}, delimiterString = "/")
     @ParameterizedTest
     @DisplayName("직선 길이 구하기 테스트")
-    void calculateLineLengthTest(String input, double length) {
-        Coordinates coordinates = new Coordinates();
-        coordinates.setCoordinates(input);
-        Calculator calculator = new Calculator();
-        assertThat(calculator.calculate(coordinates))
+    void calculateLineLengthTest(int x1, int y1, int x2, int y2, double length) {
+        Points points = new Points();
+        points.add(new Point(x1,y1));
+        points.add(new Point(x2,y2));
+        Line line = new Line(points);
+        assertThat(line.calculateLineLength())
                 .isEqualTo(length, offset(0.000099));
     }
 
