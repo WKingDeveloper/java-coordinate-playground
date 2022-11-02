@@ -6,9 +6,4 @@ public class Line extends Figure {
         super(points);
     }
 
-    @Override
-    public double calculate() {
-        return Calculator.calculateLineLength(this.getPoints().points.get(0), this.getPoints().points.get(1));
-    }
-
 }

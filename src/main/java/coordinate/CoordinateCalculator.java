@@ -1,7 +1,6 @@
 package coordinate;
 
 import coordinate.model.Figure;
-import coordinate.model.FigureFactory;
 import coordinate.model.Points;
 import coordinate.utils.StringConverter;
 import coordinate.view.InputView;
@@ -20,7 +19,8 @@ public class CoordinateCalculator {
             String pointsToString = inputView.init();
             try {
                 points = StringConverter.stringToPoints(pointsToString);
-                figure = FigureFactory.create(points);
+//                figure = FigureFactory.create(points);
+                figure = new Figure(points);
                 isValidCoordinate = false;
             } catch (RuntimeException e) {
                 resultView.validFailInputCoordinate();

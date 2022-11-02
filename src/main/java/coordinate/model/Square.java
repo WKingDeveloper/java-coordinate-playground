@@ -9,12 +9,6 @@ public class Square extends Figure {
         validRectangle();
     }
 
-    @Override
-    public double calculate() {
-        return Calculator.calculateSquareArea(super.getPoints());
-    }
-
-
     private void validRectangle() {
 
         HashSet<Integer> list = new HashSet<>();
